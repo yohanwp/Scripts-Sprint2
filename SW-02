@@ -1,0 +1,38 @@
+enable
+configure terminal
+hostname SW-02
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS"
+enable secret SenhadaEnable
+ip domain-name peachanddaisy.local
+crypto key generate rsa general-keys modulus 1024
+username Yohan privilege 15 secret Batata01
+username Kaiky privilege 15 secret Batata02
+username Augusto privilege 15 secret Batata03
+username Lucas privilege 15 secret Batata04
+line console 0
+password SenhadaConsole
+login
+exit
+service password-encryption
+line vty 0 15
+password SenhadaVTY
+transport input ssh
+exec-timeout 10
+login local
+exit
+interface gig0/1
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,99,100
+switchport trunk native vlan 99
+exit
+interface gig0/2
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,99,100
+switchport trunk native vlan 99
+exit
+interface vlan 100
+ip address 172.16.20.45 255.255.255.240
+description REDE - Servidores
+no shutdown
+exit
+do wr
