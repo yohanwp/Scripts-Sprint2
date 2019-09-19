@@ -20,6 +20,28 @@ transport input ssh
 exec-timeout 10
 login local
 exit
+vlan 10
+name Voz
+vlan 20
+name Consultores
+vlan 30
+name Analistas
+vlan 40
+name RH
+vlan 50
+name Administração
+vlan 60
+name Finanças
+vlan 70
+name TI
+vlan 80
+name Recepção
+vlan 90
+name Qualidade
+vlan 100
+name Servidor/Router/Switchs/Wireless-Router
+vlan 99
+exit
 interface gig0/1
 switchport mode trunk
 switchport trunk allowed vlan 10,20,30,40,50,60,70,80,90,99,100
@@ -35,4 +57,5 @@ ip address 172.16.20.45 255.255.255.240
 description REDE - Servidores
 no shutdown
 exit
+ip default-gateway 172.16.255.254
 do wr
